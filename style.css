@@ -1,0 +1,63 @@
+body {
+  background-color:"#F9FFFF";
+  margin:0px;
+  padding:0px;
+}
+#button1,#button2,#button3,#button4,#button5,#button6,#button7,#button8,#button9{
+ color:white;
+  transition:color 0.75s linear;
+}
+#table {
+    width:400px;
+  height:400px;
+}
+#play{
+  display:none;
+}
+.btn-block {
+  height:100%;
+  font-size:50px;
+}
+#start{
+  font-size:100%;
+}
+#simbol{
+  display:none;
+}
+a:link {color:red; text-decoration:none;}
+a:visited {color:red; text-decoration:none;}
+a:hover {color:red; text-decoration:none;}
+a:active {color:red; text-decoration:none;}
+#winbutton{
+  position:absolute;
+  display:none;
+  top:45%;
+  left:45%;
+  width:10%;
+  height:10%;
+}
+#losebutton{
+  display:none;
+  position:absolute;
+  top:45%;
+  left:45%;
+  width:10%;
+  height:10%;
+}
+#tiebutton{
+  display:none;
+  position:absolute;
+  top:45%;
+  left:45%;
+  width:10%;
+  height:10%;
+}
+#eZ:link {color:lightblue; text-decoration:none;}
+#eZ:visited {color:lightblue; text-decoration:none;}
+#eZ:hover {color:lightblue; text-decoration:none;}
+#eZ:active {color:lightblue; text-decoration:none;}
+
+#hard:link {color:red; text-decoration:none;}
+#hard:visited {color:red; text-decoration:none;}
+#hard:hover {color:red; text-decoration:none; cursor:crosshair;}
+#hard:active {color:red; text-decoration:none;}

@@ -1,0 +1,477 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link href="style.css" rel="stylesheet">
+  <title>TicTacToe</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+  <div class="card" id="start">
+    <div id="difficulty">
+      <p>choose you difficulty <a href="#" onclick="dif=true; difficulty();" id="hard">HARD</a> <a href="#" id="eZ" onclick="dif=false; difficulty();">Easy</a> <a href="#" onclick="difficulty();">Impossible</a><p>
+    </div>
+    <div id="simbol">
+    <p> click on a simbol
+      <a href="#" onclick="selection('X')">X</a>
+      <a href="#" onclick="selection('O')">O</a>
+    </p>
+   </div>
+
+</div>
+<div id="play">
+<button onClick="reset();" class="btn btn-danger" id="reset">RESET</button>
+  <span id="turn"></span>
+<table id="table" align="center">
+  <tr>
+    <td><button id="button1" class="btn btn-block" onmouseover="hovering(1);" onmouseout="out(1);" onclick="if(turn && !(pos1[1]))add(1); ">#</button></td>
+    <td><button id="button2" class="btn btn-block" onmouseover="hovering(2)" onmouseout="out(2);" onclick="if(turn && !(pos2[1]))add(2);">#</button></td>
+    <td><button id="button3" class="btn btn-block" onmouseover="hovering(3)" onmouseout="out(3);" onclick="if(turn && !(pos3[1]))add(3);">#</button></td>
+  </tr>
+  <tr>
+    <td><button id="button4" class="btn btn-block" onmouseover="hovering(4)" onmouseout="out(4);" onclick="if(turn && !(pos4[1]))add(4);">#</button></td>
+    <td><button id="button5" class="btn btn-block" onmouseover="hovering(5)" onmouseout="out(5);" onclick="if(turn && !(pos5[1]))add(5);">#</button></td>
+    <td><button id="button6" class="btn btn-block" onmouseover="hovering(6)" onmouseout="out(6);" onclick="if(turn && !(pos6[1]))add(6);">#</button></td>
+  </tr>
+  <tr>
+    <td><button id="button7" class="btn btn-block" onmouseover="hovering(7)" onmouseout="out(7);" onclick="if(turn && !(pos7[1]))add(7);">#</button></td>
+    <td><button id="button8" class="btn btn-block" onmouseover="hovering(8)" onmouseout="out(8);" onclick="if(turn && !(pos8[1]))add(8);">#</button></td>
+    <td><button id="button9" class="btn btn-block" onmouseover="hovering(9)" onmouseout="out(9);" onclick="if(turn && !(pos9[1]))add(9);">#</button></td>
+  </tr>
+</table>
+  </div>
+<button id="winbutton" class="btn btn-primary" onclick="reset();">YOU WIN</button>
+<button id="losebutton" class="btn btn-danger" onclick="reset();">YOU LOSE</button>
+<button id="tiebutton" onclick="reset();">It's a tie</button>
+  <script>
+      var pos1=[document.getElementById("button1"),false];
+  var pos2=[document.getElementById("button2"),false];
+  var pos3=[document.getElementById("button3"),false];
+  var pos4=[document.getElementById("button4"),false];
+  var pos5=[document.getElementById("button5"),false];
+  var pos6=[document.getElementById("button6"),false];
+  var pos7=[document.getElementById("button7"),false];
+  var pos8=[document.getElementById("button8"),false];
+  var pos9=[document.getElementById("button9"),false];
+  var start=document.getElementById("start");
+  var play=document.getElementById("play");
+  var user;
+  var turn;
+  var machine;
+  var dif;
+
+  function difficulty(){ document.getElementById("difficulty").style.display="none" ; document.getElementById("simbol").style.display="block" ;
+                       }
+  function selection(what){
+    if(what=='X'){user='X'; machine='O';}
+    else {user='O'; machine='X';}
+    start.style.display="none";
+    play.style.display="inline";
+    if(Math.floor(Math.random()*2)==0){
+   turn=false;
+    }
+    else turn=true;
+  }
+  function hovering(pos){
+    switch(pos){
+      case 1:
+        if(pos1[1]) pos1[0].style.color="red";
+        else pos1[0].style.color="blue";
+        break;
+          case 2:
+              if(pos2[1]) pos2[0].style.color="red";
+        else pos2[0].style.color="blue";
+        break;
+            case 3:
+              if(pos3[1]) pos3[0].style.color="red";
+        else pos3[0].style.color="blue";
+        break;
+            case 4:
+              if(pos4[1]) pos4[0].style.color="red";
+        else pos4[0].style.color="blue";
+        break;
+            case 5:
+              if(pos5[1]) pos5[0].style.color="red";
+        else pos5[0].style.color="blue";
+        break;
+            case 6:
+              if(pos6[1]) pos6[0].style.color="red";
+        else pos6[0].style.color="blue";
+        break;
+            case 7:
+              if(pos7[1]) pos7[0].style.color="red";
+        else pos7[0].style.color="blue";
+        break;
+            case 8:
+              if(pos8[1]) pos8[0].style.color="red";
+        else pos8[0].style.color="blue";
+        break;
+            case 9:
+              if(pos9[1]) pos9[0].style.color="red";
+        else pos9[0].style.color="blue";
+        break;
+              }
+  }
+  function out(posi){
+    switch(posi){
+      case 1:
+       pos1[0].style.color="white";
+        break;
+            case 2:
+        pos2[0].style.color="white";
+        break;
+            case 3:
+        pos3[0].style.color="white";
+        break;
+            case 4:
+        pos4[0].style.color="white";
+        break;
+            case 5:
+        pos5[0].style.color="white";
+        break;
+            case 6:
+        pos6[0].style.color="white";
+        break;
+            case 7:
+        pos7[0].style.color="white";
+        break;
+            case 8:
+        pos8[0].style.color="white";
+        break;
+            case 9:
+        pos9[0].style.color="white";
+        break;
+               }
+  }
+  function random(DONE) {
+    while(!(DONE)){
+
+         switch (Math.floor((Math.random()*9)+1)){
+  case 1:
+   if(!pos1[1]){
+   pos1[0].innerHTML=machine;
+   pos1[1]=true;
+   DONE=true;
+   }
+    break;
+        case 2:
+            if(!(pos2[1])){
+    pos2[0].innerHTML=machine;
+   pos2[1]=true;
+             DONE=true;
+            }
+    break;
+        case 3:
+              if(!(pos3[1])){
+    pos3[0].innerHTML=machine;
+   pos3[1]=true;
+             DONE=true;}
+    break;
+        case 4:
+              if(!(pos4[1])){
+    pos4[0].innerHTML=machine;
+   pos4[1]=true;
+                DONE=true;}
+    break;
+        case 5:
+             if(!(pos5[1])){
+    pos5[0].innerHTML=machine;
+   pos5[1]=true;
+             DONE=true;}
+    break;
+        case 6:
+             if(!(pos6[1])){
+    pos6[0].innerHTML=machine;
+   pos6[1]=true;
+             DONE=true;}
+    break;
+        case 7:
+             if(!(pos7[1])){
+    pos7[0].innerHTML=machine;
+   pos7[1]=true;
+              DONE=true;}
+    break;
+        case 8:
+             if(!(pos8[1])){
+    pos8[0].innerHTML=machine;
+   pos8[1]=true;
+               DONE=true;}
+    break;
+        case 9:
+             if(!(pos9[1])){
+    pos9[0].innerHTML=machine;
+   pos9[1]=true;
+               DONE=true;}
+    break;
+    }
+
+  }
+ check();
+  }
+  function win(){
+
+   play.style.display="none";
+    document.getElementById("winbutton").style.display="block";
+    turn=undefined;
+  }
+  function lose(){
+   play.style.display="none";
+    document.getElementById("losebutton").style.display="block";
+    turn=undefined;
+  }
+  function check(){
+   var comb1=pos1[0].innerHTML==pos2[0].innerHTML && pos2[0].innerHTML==pos3[0].innerHTML;
+   var comb2=pos1[0].innerHTML==pos4[0].innerHTML && pos4[0].innerHTML==pos7[0].innerHTML;
+   var comb3=pos1[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML==pos9[0].innerHTML;
+   var comb4=pos2[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML==pos8[0].innerHTML;
+   var comb5=pos3[0].innerHTML==pos6[0].innerHTML && pos6[0].innerHTML==pos9[0].innerHTML;
+   var comb6=pos4[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML==pos6[0].innerHTML;
+   var comb7=pos7[0].innerHTML==pos8[0].innerHTML && pos8[0].innerHTML==pos9[0].innerHTML;
+   var comb8=pos3[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML==pos7[0].innerHTML;
+   if(comb1 && pos1[0].innerHTML==user) win();
+   else if(comb1 && pos1[0].innerHTML==machine) lose();
+   else if(comb2 && pos1[0].innerHTML==user) win();
+   else if(comb2 && pos1[0].innerHTML==machine) lose();
+   else if(comb3 && pos1[0].innerHTML==user) win();
+   else if(comb3 && pos1[0].innerHTML==machine) lose();
+   else if(comb4 && pos2[0].innerHTML==user) win();
+   else if(comb4 && pos2[0].innerHTML==machine) lose();
+   else if(comb5 && pos3[0].innerHTML==user) win();
+   else if(comb5 && pos3[0].innerHTML==machine) lose();
+   else if(comb6 && pos4[0].innerHTML==user) win();
+   else if(comb6 && pos4[0].innerHTML==machine) lose();
+   else if(comb7 && pos7[0].innerHTML==user) win();
+   else if(comb7 && pos7[0].innerHTML==machine) lose();
+   else if(comb8 && pos3[0].innerHTML==user) win();
+   else if(comb8 && pos3[0].innerHTML==machine) lose();
+   else if(pos1[1] && pos2[1] && pos3[1] && pos4[1] && pos5[1] && pos6[1] && pos7[1] && pos8[1] && pos9[1]) {
+     play.style.display="none";
+      document.getElementById("tiebutton").style.display="block";
+      turn=undefined;
+   }
+  }
+  function add(thingy){
+     switch(thingy){
+      case 1:
+       pos1[0].innerHTML=user;
+       pos1[1]=true;
+        break;
+            case 2:
+        pos2[0].innerHTML=user;
+       pos2[1]=true;
+        break;
+            case 3:
+        pos3[0].innerHTML=user;
+       pos3[1]=true;
+        break;
+            case 4:
+        pos4[0].innerHTML=user;
+       pos4[1]=true;
+        break;
+            case 5:
+        pos5[0].innerHTML=user;
+       pos5[1]=true;
+        break;
+            case 6:
+        pos6[0].innerHTML=user;
+       pos6[1]=true;
+        break;
+            case 7:
+        pos7[0].innerHTML=user;
+       pos7[1]=true;
+        break;
+            case 8:
+        pos8[0].innerHTML=user;
+       pos8[1]=true;
+        break;
+            case 9:
+        pos9[0].innerHTML=user;
+       pos9[1]=true;
+        break;
+                  }
+    turn=false;
+    check();
+  }
+  function playmachine(){
+    if(dif){
+    if(pos1[0].innerHTML==pos2[0].innerHTML && pos3[0].innerHTML=="#" && pos1[0].innerHTML !="#") {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos1[0].innerHTML=="#" && pos2[0].innerHTML==pos3[0].innerHTML && pos2[0].innerHTML != "#") {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos1[0].innerHTML==pos3[0].innerHTML && pos2[0].innerHTML=="#" && pos1[0].innerHTML != "#") {pos2[0].innerHTML=machine; pos2[1]=true;}
+    else if(pos1[0].innerHTML==pos4[0].innerHTML && pos7[0].innerHTML=="#" && pos1[0].innerHTML != "#") {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos1[0].innerHTML==pos7[0].innerHTML && pos4[0].innerHTML=="#" && pos1[0].innerHTML != "#") {pos4[0].innerHTML=machine; pos4[1]=true;}
+    else if(pos4[0].innerHTML==pos7[0].innerHTML && pos1[0].innerHTML=="#" && pos4[0].innerHTML != "#") {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos5[0].innerHTML==pos9[0].innerHTML && pos1[0].innerHTML=="#" && pos5[0].innerHTML != "#") {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos1[0].innerHTML==pos9[0].innerHTML && pos5[0].innerHTML=="#" && pos1[0].innerHTML != "#") {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos5[0].innerHTML==pos1[0].innerHTML && pos9[0].innerHTML=="#" && pos5[0].innerHTML != "#") {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos2[0].innerHTML==pos5[0].innerHTML && pos8[0].innerHTML=="#" && pos2[0].innerHTML != "#") {pos8[0].innerHTML=machine; pos8[1]=true;}
+    else if(pos5[0].innerHTML==pos8[0].innerHTML && pos2[0].innerHTML=="#" && pos5[0].innerHTML != "#") {pos2[0].innerHTML=machine; pos2[1]=true;}
+    else if(pos8[0].innerHTML==pos2[0].innerHTML && pos5[0].innerHTML=="#" && pos8[0].innerHTML != "#") {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos3[0].innerHTML==pos6[0].innerHTML && pos9[0].innerHTML=="#" && pos3[0].innerHTML != "#") {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos6[0].innerHTML==pos9[0].innerHTML && pos3[0].innerHTML=="#" && pos6[0].innerHTML != "#") {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos9[0].innerHTML==pos3[0].innerHTML && pos6[0].innerHTML=="#" && pos9[0].innerHTML != "#") {pos6[0].innerHTML=machine; pos6[1]=true;}
+    else if(pos4[0].innerHTML==pos5[0].innerHTML && pos6[0].innerHTML=="#" && pos4[0].innerHTML != "#") {pos6[0].innerHTML=machine; pos6[1]=true;}
+    else if(pos5[0].innerHTML==pos6[0].innerHTML && pos4[0].innerHTML=="#" && pos5[0].innerHTML != "#") {pos4[0].innerHTML=machine; pos4[1]=true;}
+    else if(pos4[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML=="#" && pos4[0].innerHTML != "#") {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos7[0].innerHTML==pos8[0].innerHTML && pos9[0].innerHTML=="#" && pos7[0].innerHTML != "#") {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos7[0].innerHTML==pos9[0].innerHTML && pos8[0].innerHTML=="#" && pos7[0].innerHTML != "#") {pos8[0].innerHTML=machine; pos8[1]=true;}
+    else if(pos8[0].innerHTML==pos9[0].innerHTML && pos7[0].innerHTML=="#" && pos8[0].innerHTML != "#") {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos3[0].innerHTML==pos5[0].innerHTML && pos7[0].innerHTML=="#" && pos3[0].innerHTML != "#") {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos5[0].innerHTML==pos7[0].innerHTML && pos3[0].innerHTML=="#" && pos5[0].innerHTML != "#") {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos7[0].innerHTML==pos3[0].innerHTML && pos5[0].innerHTML=="#" && pos7[0].innerHTML != "#") {pos5[0].innerHTML=machine; pos5[1]=true;}
+
+      else{
+       let DONE=false;
+    if(pos1[1]&&pos2[1]&&pos3[1]&&pos4[1]&&pos5[1]&&pos6[1]&&pos7[1]&&pos8[1]&&pos9[1]) DONE=true;
+    random(DONE);
+  }
+  }
+   else if(dif===false){
+      let DONE=false;
+    if(pos1[1]&&pos2[1]&&pos3[1]&&pos4[1]&&pos5[1]&&pos6[1]&&pos7[1]&&pos8[1]&&pos9[1]) DONE=true;
+    random(DONE);
+      }
+     else {
+    if(pos1[0].innerHTML==pos2[0].innerHTML && pos3[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == machine) {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos1[0].innerHTML=="#" && pos2[0].innerHTML==pos3[0].innerHTML && pos2[0].innerHTML != "#" && pos2[0].innerHTML == machine) {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos1[0].innerHTML==pos3[0].innerHTML && pos2[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == machine) {pos2[0].innerHTML=machine; pos2[1]=true;}
+    else if(pos1[0].innerHTML==pos4[0].innerHTML && pos7[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == machine) {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos1[0].innerHTML==pos7[0].innerHTML && pos4[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == machine) {pos4[0].innerHTML=machine; pos4[1]=true;}
+    else if(pos4[0].innerHTML==pos7[0].innerHTML && pos1[0].innerHTML=="#" && pos4[0].innerHTML != "#" && pos4[0].innerHTML == machine) {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos5[0].innerHTML==pos9[0].innerHTML && pos1[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == machine) {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos1[0].innerHTML==pos9[0].innerHTML && pos5[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == machine) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos5[0].innerHTML==pos1[0].innerHTML && pos9[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == machine) {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos2[0].innerHTML==pos5[0].innerHTML && pos8[0].innerHTML=="#" && pos2[0].innerHTML != "#" && pos2[0].innerHTML == machine) {pos8[0].innerHTML=machine; pos8[1]=true;}
+    else if(pos5[0].innerHTML==pos8[0].innerHTML && pos2[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == machine) {pos2[0].innerHTML=machine; pos2[1]=true;}
+    else if(pos8[0].innerHTML==pos2[0].innerHTML && pos5[0].innerHTML=="#" && pos8[0].innerHTML != "#" && pos8[0].innerHTML == machine) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos3[0].innerHTML==pos6[0].innerHTML && pos9[0].innerHTML=="#" && pos3[0].innerHTML != "#" && pos3[0].innerHTML == machine) {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos6[0].innerHTML==pos9[0].innerHTML && pos3[0].innerHTML=="#" && pos6[0].innerHTML != "#" && pos6[0].innerHTML == machine) {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos9[0].innerHTML==pos3[0].innerHTML && pos6[0].innerHTML=="#" && pos9[0].innerHTML != "#" && pos9[0].innerHTML == machine) {pos6[0].innerHTML=machine; pos6[1]=true;}
+    else if(pos4[0].innerHTML==pos5[0].innerHTML && pos6[0].innerHTML=="#" && pos4[0].innerHTML != "#" && pos4[0].innerHTML == machine) {pos6[0].innerHTML=machine; pos6[1]=true;}
+    else if(pos5[0].innerHTML==pos6[0].innerHTML && pos4[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == machine) {pos4[0].innerHTML=machine; pos4[1]=true;}
+    else if(pos4[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML=="#" && pos4[0].innerHTML != "#" && pos4[0].innerHTML == machine) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos7[0].innerHTML==pos8[0].innerHTML && pos9[0].innerHTML=="#" && pos7[0].innerHTML != "#" && pos7[0].innerHTML == machine) {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos7[0].innerHTML==pos9[0].innerHTML && pos8[0].innerHTML=="#" && pos7[0].innerHTML != "#" && pos7[0].innerHTML == machine) {pos8[0].innerHTML=machine; pos8[1]=true;}
+    else if(pos8[0].innerHTML==pos9[0].innerHTML && pos7[0].innerHTML=="#" && pos8[0].innerHTML != "#" && pos8[0].innerHTML == machine) {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos3[0].innerHTML==pos5[0].innerHTML && pos7[0].innerHTML=="#" && pos3[0].innerHTML != "#" && pos3[0].innerHTML == machine) {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos5[0].innerHTML==pos7[0].innerHTML && pos3[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == machine) {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos7[0].innerHTML==pos3[0].innerHTML && pos5[0].innerHTML=="#" && pos7[0].innerHTML != "#" && pos7[0].innerHTML == machine) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos1[0].innerHTML==pos2[0].innerHTML && pos3[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == user) {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos1[0].innerHTML=="#" && pos2[0].innerHTML==pos3[0].innerHTML && pos2[0].innerHTML != "#" && pos2[0].innerHTML == user) {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos1[0].innerHTML==pos3[0].innerHTML && pos2[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == user) {pos2[0].innerHTML=machine; pos2[1]=true;}
+    else if(pos1[0].innerHTML==pos4[0].innerHTML && pos7[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == user) {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos1[0].innerHTML==pos7[0].innerHTML && pos4[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == user) {pos4[0].innerHTML=machine; pos4[1]=true;}
+    else if(pos4[0].innerHTML==pos7[0].innerHTML && pos1[0].innerHTML=="#" && pos4[0].innerHTML != "#" && pos4[0].innerHTML == user) {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos5[0].innerHTML==pos9[0].innerHTML && pos1[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == user) {pos1[0].innerHTML=machine; pos1[1]=true;}
+    else if(pos1[0].innerHTML==pos9[0].innerHTML && pos5[0].innerHTML=="#" && pos1[0].innerHTML != "#" && pos1[0].innerHTML == user) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos5[0].innerHTML==pos1[0].innerHTML && pos9[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == user) {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos2[0].innerHTML==pos5[0].innerHTML && pos8[0].innerHTML=="#" && pos2[0].innerHTML != "#" && pos2[0].innerHTML == user) {pos8[0].innerHTML=machine; pos8[1]=true;}
+    else if(pos5[0].innerHTML==pos8[0].innerHTML && pos2[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == user) {pos2[0].innerHTML=machine; pos2[1]=true;}
+    else if(pos8[0].innerHTML==pos2[0].innerHTML && pos5[0].innerHTML=="#" && pos8[0].innerHTML != "#" && pos8[0].innerHTML == user) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos3[0].innerHTML==pos6[0].innerHTML && pos9[0].innerHTML=="#" && pos3[0].innerHTML != "#" && pos3[0].innerHTML == user) {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos6[0].innerHTML==pos9[0].innerHTML && pos3[0].innerHTML=="#" && pos6[0].innerHTML != "#" && pos6[0].innerHTML == user) {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos9[0].innerHTML==pos3[0].innerHTML && pos6[0].innerHTML=="#" && pos9[0].innerHTML != "#" && pos9[0].innerHTML == user) {pos6[0].innerHTML=machine; pos6[1]=true;}
+    else if(pos4[0].innerHTML==pos5[0].innerHTML && pos6[0].innerHTML=="#" && pos4[0].innerHTML != "#" && pos4[0].innerHTML == user) {pos6[0].innerHTML=machine; pos6[1]=true;}
+    else if(pos5[0].innerHTML==pos6[0].innerHTML && pos4[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == user) {pos4[0].innerHTML=machine; pos4[1]=true;}
+    else if(pos4[0].innerHTML==pos5[0].innerHTML && pos5[0].innerHTML=="#" && pos4[0].innerHTML != "#" && pos4[0].innerHTML == user) {pos5[0].innerHTML=machine; pos5[1]=true;}
+    else if(pos7[0].innerHTML==pos8[0].innerHTML && pos9[0].innerHTML=="#" && pos7[0].innerHTML != "#" && pos7[0].innerHTML == user) {pos9[0].innerHTML=machine; pos9[1]=true;}
+    else if(pos7[0].innerHTML==pos9[0].innerHTML && pos8[0].innerHTML=="#" && pos7[0].innerHTML != "#" && pos7[0].innerHTML == user) {pos8[0].innerHTML=machine; pos8[1]=true;}
+    else if(pos8[0].innerHTML==pos9[0].innerHTML && pos7[0].innerHTML=="#" && pos8[0].innerHTML != "#" && pos8[0].innerHTML == user) {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos3[0].innerHTML==pos5[0].innerHTML && pos7[0].innerHTML=="#" && pos3[0].innerHTML != "#" && pos3[0].innerHTML == user) {pos7[0].innerHTML=machine; pos7[1]=true;}
+    else if(pos5[0].innerHTML==pos7[0].innerHTML && pos3[0].innerHTML=="#" && pos5[0].innerHTML != "#" && pos5[0].innerHTML == user) {pos3[0].innerHTML=machine; pos3[1]=true;}
+    else if(pos7[0].innerHTML==pos3[0].innerHTML && pos5[0].innerHTML=="#" && pos7[0].innerHTML != "#" && pos7[0].innerHTML == user) {pos5[0].innerHTML=machine; pos5[1]=true;}
+
+     else {
+     let DONE=false;
+
+    if(pos1[1]&&pos2[1]&&pos3[1]&&pos4[1]&&pos5[1]&&pos6[1]&&pos7[1]&&pos8[1]&&pos9[1]) {DONE=true;}
+
+       if(pos1[1 ]&& pos3[1] && pos5[1] && pos7[1] && pos9[1]){
+      random(DONE);
+      }
+       else{
+         if((pos1[0].innerHTML==user || pos3[0].innerHTML==user || pos7[0].innerHTML==user || pos9[0].innerHTML==user) && (!pos5[1])){
+            pos5[0].innerHTML=machine;
+            pos5[1]=true;
+         }
+         else if((pos1[0].innerHTML==user && pos9[0].innerHTML==user) || (pos3[0].innerHTML==user && pos7[0].innerHTML==user) && !pos2[1]){
+            pos2[0].innerHTML=machine;
+            pos2[1]=true;
+         }
+         else{
+        while(!DONE){
+          switch(Math.floor(Math.random()*5)+1){
+      case 1:
+       if(!pos1[1]){
+       pos1[0].innerHTML=machine;
+       pos1[1]=true;
+       DONE=true;
+       }
+        break;
+            case 2:
+                if(!(pos3[1])){
+        pos3[0].innerHTML=machine;
+       pos3[1]=true;
+                 DONE=true;
+                }
+        break;
+            case 3:
+                  if(!(pos5[1])){
+        pos5[0].innerHTML=machine;
+       pos5[1]=true;
+                 DONE=true;}
+        break;
+            case 4:
+                  if(!(pos7[1])){
+        pos7[0].innerHTML=machine;
+       pos7[1]=true;
+                    DONE=true;}
+        break;
+            case 5:
+                 if(!(pos9[1])){
+        pos9[0].innerHTML=machine;
+       pos9[1]=true;
+                 DONE=true;}
+        break;
+
+
+   } } } }
+       check();
+     }
+   }
+
+        turn=true;
+    check();
+    }
+  function reset(){
+    document.getElementById("winbutton").style.display="none";
+    document.getElementById("losebutton").style.display="none";
+    document.getElementById('tiebutton').style.display="none";
+    play.style.display="none";
+    start.style.display="block";
+    document.getElementById("difficulty").style.display="block";
+    document.getElementById("simbol").style.display="none";
+    pos1[0].innerHTML="#";
+    pos1[1]=false;
+    pos2[0].innerHTML="#";
+    pos2[1]=false;
+    pos3[0].innerHTML="#";
+    pos3[1]=false;
+    pos4[0].innerHTML="#";
+    pos4[1]=false;
+    pos5[0].innerHTML="#";
+    pos5[1]=false;
+    pos6[0].innerHTML="#";
+    pos6[1]=false;
+    pos7[0].innerHTML="#";
+    pos7[1]=false;
+    pos8[0].innerHTML="#";
+    pos8[1]=false;
+    pos9[0].innerHTML="#";
+    pos9[1]=false;
+    turn=undefined;
+    dif=undefined;
+  }
+
+  setInterval(function(){if(turn===false)playmachine();},500)
+  </script>
+</body>
+</html>
